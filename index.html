@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Credibility Checker</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="main-container">
+    <div class="header">
+      <h1>Credibility Checker</h1>
+      <p class="subtitle">Verify news claims with AI-powered fact-checking</p>
+    </div>
+
+    <div class="input-section">
+      <form id="claimForm">
+        <textarea name="claim" id="claim" placeholder="Paste a news claim to verify..." required></textarea>
+        <button type="submit">
+          <span class="button-text">Verify Claim</span>
+          <span class="button-loader" style="display: none;">⏳ Analyzing...</span>
+        </button>
+      </form>
+    </div>
+
+    <div id="results-container" style="display: none;">
+      <div class="content-wrapper">
+        <!-- Left Column -->
+        <div class="left-column">
+          <!-- Expert Summary Section -->
+          <section class="card expert-summary" id="expert-summary">
+            <div class="card-header">
+              <span class="icon">📊</span>
+              <h2>Expert Summary</h2>
+            </div>
+            <div class="card-body">
+              <div id="summary-content"></div>
+              
+              <div class="confidence-wrapper">
+                <p class="confidence-label">CREDIBILITY SCORE</p>
+                <div class="confidence-score">
+                  <span class="score-number" id="score-number">--</span>
+                  <span class="score-percent">%</span>
+                </div>
+                <p class="confidence-subtitle" id="confidence-label">--</p>
+                <div class="confidence-arc">
+                  <svg width="120" height="60" viewBox="0 0 120 60">
+                    <path d="M 10 50 A 50 50 0 0 1 110 50" fill="none" stroke="#e0e0e0" stroke-width="8"/>
+                    <path id="score-arc" d="M 10 50 A 50 50 0 0 1 52 13" fill="none" stroke="#ef4444" stroke-width="8" stroke-linecap="round"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Analysis Section -->
+          <section class="card analysis-section" id="analysis-section">
+            <div class="card-header">
+              <span class="icon">🔍</span>
+              <h2>Detailed Analysis</h2>
+            </div>
+            <div class="card-body" id="analysis-content">
+            </div>
+          </section>
+
+          <!-- Documentary Evidence Section -->
+          <section class="card documentary-evidence" id="sources-section" style="display: none;">
+            <div class="card-header">
+              <span class="icon">📄</span>
+              <h2>Documentary Evidence</h2>
+              <span class="evidence-count" id="source-count">0 SOURCES</span>
+            </div>
+            <div class="card-body sources-grid" id="sources-grid">
+            </div>
+          </section>
+        </div>
+
+        <!-- Right Column -->
+        <div class="right-column">
+          <!-- Stats Card -->
+          <div class="stats-card">
+            <div class="stat-row">
+              <span class="stat-label">Credibility Score</span>
+              <span class="stat-value highlight" id="stat-score">--</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Confidence Level</span>
+              <span class="stat-value" id="stat-confidence">--</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Sources Found</span>
+              <span class="stat-value" id="stat-sources">0</span>
+            </div>
+          </div>
+      
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
